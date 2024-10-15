@@ -10,6 +10,9 @@ import {
   PREDEFINED_LOG_MESSAGES,
 } from "./log-helpers";
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from "fs";
+import { getPackageManagerRunner } from "./detect-pm";
+
+const runner = getPackageManagerRunner();
 
 export type DatabaseProviderType =
   | "sqlite"
@@ -29,7 +32,7 @@ export async function isPrismaCLIInstalled(
   directory: string,
 ): Promise<boolean> {
   try {
-    await execa("npx", ["prisma", "version"], { cwd: directory });
+    await execa(runner, ["prisma", "version"], { cwd: directory });
     logSuccess(PREDEFINED_LOG_MESSAGES.isPrismaCLIinstalled.yes);
     return true;
   } catch (error) {
@@ -84,7 +87,7 @@ export async function initPrisma({
   try {
     log(PREDEFINED_LOG_MESSAGES.initPrisma.action);
 
-    const { stdout: initializePrisma } = await execa("npx", command, {
+    const { stdout: initializePrisma } = await execa(runner, command, {
       cwd: directory,
     });
 
@@ -149,7 +152,7 @@ export async function runMigration(directory: string) {
   try {
     log(PREDEFINED_LOG_MESSAGES.runMigration.action);
 
-    await execa("npx", ["prisma", "migrate", "dev", "--name", "init"], {
+    await execa(runner, ["prisma", "migrate", "dev", "--name", "init"], {
       cwd: directory,
     });
     logSuccess(PREDEFINED_LOG_MESSAGES.runMigration.success);
@@ -165,7 +168,7 @@ export async function runMigration(directory: string) {
 export async function formatSchema(directory: string) {
   try {
     log(PREDEFINED_LOG_MESSAGES.formatSchema.action);
-    await execa("npx", ["prisma", "format"], { cwd: directory });
+    await execa(runner, ["prisma", "format"], { cwd: directory });
   } catch {
     logError(PREDEFINED_LOG_MESSAGES.formatSchema.error);
   }
@@ -195,7 +198,7 @@ export async function generateClient(
 
   try {
     const { stdout: generateClient } = await execa(
-      "npx",
+      runner,
       ["prisma", "generate"],
       { cwd: directory },
     );
@@ -215,7 +218,7 @@ export async function installStudio(directory: string) {
 
     log(PREDEFINED_LOG_MESSAGES.installStudio.action);
 
-    await spawn("npx", ["prisma", "studio", "--browser", "none"], {
+    await spawn(runner, ["prisma", "studio", "--browser", "none"], {
       cwd: directory,
     });
 

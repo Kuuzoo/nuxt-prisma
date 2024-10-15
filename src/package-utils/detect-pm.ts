@@ -28,6 +28,21 @@ function detectPackageManager(): PackageManager {
   return "npm";
 }
 
+export const getPackageManagerRunner = () => {
+  const pm = detectPackageManager();
+
+  const runners = {
+    npm: "npx",
+    pnpm: "pnpm dlx",
+    yarn: "yarn dlx",
+    bun: "bun x"
+  };
+  
+  console.log(runners[pm] || "npx");
+
+  return runners[pm] || "npx";
+}
+
 export const installingPrismaCLIWithPM = () => {
   const pm = detectPackageManager();
 

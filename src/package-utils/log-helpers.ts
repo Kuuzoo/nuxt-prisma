@@ -1,4 +1,5 @@
 import chalk from "chalk";
+import { getPackageManagerRunner } from "./detect-pm";
 
 export function logSuccess(message: string) {
   console.log(chalk.green(`✔ ${message}`));
@@ -76,7 +77,7 @@ export const PREDEFINED_LOG_MESSAGES = {
   suggestions: {
     migrate:
       chalk.yellow(chalk.bold("\nHint: ")) +
-      `You can manually run migrations by executing ${chalk.cyan.bold("npx prisma migrate dev")} or visit the ${chalk.blue.bold("Prisma Migrate")} docs for more info:\n${chalk.underline.blue("https://pris.ly/nuxt/migrate")}. ` +
+      `You can manually run migrations by executing ${chalk.cyan.bold(`${getPackageManagerRunner()} prisma migrate dev`)} or visit the ${chalk.blue.bold("Prisma Migrate")} docs for more info:\n${chalk.underline.blue("https://pris.ly/nuxt/migrate")}. ` +
       `Or if you have pre-existing data on your database, you have to introspect it. Learn more in our docs:\n${chalk.underline.blue("https://pris.ly/nuxt/dbpull")}.\n`,
   },
 };
