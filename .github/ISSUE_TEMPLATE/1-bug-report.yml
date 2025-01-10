@@ -47,10 +47,10 @@ body:
       label: Additional Information
       description: Include any other relevant information that may assist in resolving the issue.
   - type: checkboxes
-    id: additional-info
+    id: assistance-info
     attributes:
-      label: Additional information
-      description: Additional information that helps us understand your willingness to assist in resolving this issue.
+      label: Assistance Information
+      description: Information that helps us understand your willingness to assist in resolving this issue.
       options:
         - label: Would you be willing to help resolve this issue?
   - type: checkboxes
