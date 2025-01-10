@@ -21,17 +21,6 @@ body:
       required: true
   - type: textarea
     attributes:
-      label: Steps to Reproduce
-      description: Provide a detailed description of the steps to reproduce the issue, including any relevant code snippets.
-    validations:
-      required: true
-  - type: input
-    attributes:
-      label: Reproduction Link
-      description: Optionally, provide a link to a reproduction of the issue on platforms like StackBlitz, CodeSandbox, etc.
-      placeholder: Enter the reproduction link here
-  - type: textarea
-    attributes:
       label: Expected Behavior
       description: Describe the expected behavior in detail. Text descriptions are preferred over screenshots.
     validations:
@@ -44,5 +33,33 @@ body:
       required: true
   - type: textarea
     attributes:
+      label: Steps to Reproduce
+      description: Provide a detailed description of the steps to reproduce the issue, including any relevant code snippets.
+    validations:
+      required: true
+  - type: input
+    attributes:
+      label: Reproduction Link
+      description: Optionally, provide a link to a reproduction of the issue on platforms like StackBlitz, CodeSandbox, etc.
+      placeholder: Enter the reproduction link here
+  - type: textarea
+    attributes:
       label: Additional Information
       description: Include any other relevant information that may assist in resolving the issue.
+  - type: checkboxes
+    id: additional-info
+    attributes:
+      label: Additional information
+      description: Additional information that helps us understand your willingness to assist in resolving this issue.
+      options:
+        - label: Would you be willing to help resolve this issue?
+  - type: checkboxes
+    id: final-checks
+    attributes:
+      label: Final checks
+      description: Before submitting, please make sure you do the following
+      options:
+        - label: Read the [contribution guide](https://github.com/prisma/prisma-nuxt/blob/main/CONTRIBUTING.md).
+          required: true
+        - label: Check existing [discussions](https://github.com/prisma/prisma-nuxt/discussions) and [issues](https://github.com/prisma/prisma-nuxt/issues) to ensure that this issues hasn't already been reported.
+          required: true
